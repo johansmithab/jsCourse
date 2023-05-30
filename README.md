@@ -265,9 +265,9 @@ h1#title.big.heading .inner-box .box > li{
 * Sticky:
 * Z-index: Determines which element should be infront – Z cordinate –.
 
-![CSS Positioning](../jsCourse/img/CSS%20Positioning%201.png)
+![CSS Positioning](img/CSS%20Positioning%201.png)
 
-![CSS Positioning](../jsCourse/img/CSS%20Positioning.png)
+![CSS Positioning](img/CSS%20Positioning.png)
 
 
 # JavaScript Course Notes
@@ -882,7 +882,7 @@ document.querySelector("a").setAttribute("href", "https://www.bing.com/"); // Se
 
 ### **Objects**
 
-![JS Objects](../jsCourse/img/JS%20Objects.png)
+![JS Objects](img/JS%20Objects.png)
 
 OOP (Object-Oriented Programming) - It tries to model a real-life object.
 
