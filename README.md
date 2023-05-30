@@ -208,7 +208,7 @@ h1 {
 
 ## **Box Model Marging, Padding and Border**
 
-![Box Model](../jsCourse/img/boxModel.png)
+![Box Model](./jsCourse/img/boxModel.png)
 
 <!-- <img src="../jsCourse/img/boxModel.png"
      alt="Box Model"
