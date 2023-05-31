@@ -208,7 +208,7 @@ h1 {
 
 ## **Box Model Marging, Padding and Border**
 
-![Box Model](img/boxModel.png)
+![Box Model](../jsCourse/img/boxModel.png)
 
 <!-- <img src="../jsCourse/img/boxModel.png"
      alt="Box Model"
@@ -265,9 +265,9 @@ h1#title.big.heading .inner-box .box > li{
 * Sticky:
 * Z-index: Determines which element should be infront – Z cordinate –.
 
-![CSS Positioning](img/CSS%20Positioning%201.png)
+![CSS Positioning](../jsCourse/img/CSS%20Positioning%201.png)
 
-![CSS Positioning](img/CSS%20Positioning.png)
+![CSS Positioning](../jsCourse/img/CSS%20Positioning.png)
 
 
 # JavaScript Course Notes
@@ -882,7 +882,7 @@ document.querySelector("a").setAttribute("href", "https://www.bing.com/"); // Se
 
 ### **Objects**
 
-![JS Objects](img/JS%20Objects.png)
+![JS Objects](../jsCourse/img/JS%20Objects.png)
 
 OOP (Object-Oriented Programming) - It tries to model a real-life object.
 
@@ -1024,9 +1024,183 @@ console.log(person1);
 
 const person2 = Person(); // Object from the constructor
 console.log(person2);
+
+// Prototype: It refers to the structure of a constructor.
+
+// JS is a Prototype OOP Language.
+
+function Person(name, lastName) {
+    "use strict";
+    this.name = name;
+    this.lastName = lastName;
+    this.showName = function () {
+        return `${this.name} ${this.lastName}`;
+    };
+};
+
+const person1 = new Person("Johan", "Smith");
+const person2 = new Person("Mario", "Marcelo");
+const person3 = new Person("Ivan", "Sisa");
+const person4 = new Person("Stick", "Diaz");
+
+Person.prototype.greet = function () {
+    return `Hello this is ${this.name} ${this.lastName}`;
+};
+
+Person.prototype.age = 25; // Prototype allows as to add attributes and methods to a constructor.
+
+console.log(person1);
+console.log(person2);
+console.log(person3);
+console.log(person4);
+
+console.log(person1.greet());
+console.log(person2.greet());
+console.log(person3.greet());
+console.log(person4.greet());
+
+console.log(person1.age);
+console.log(person2.age);
+console.log(person3.age);
+console.log(person4.age);
 ```
 
+### **Classes**
 
+```javascript
+// Constructor
+function Person(name, lastName) {
+    this.name = name;
+    this.lastName = lastName;
+}
+
+// Class
+class Person { // Syntactic Sugar
+    constructor(name, lastName) { // Method that returns properties
+        this.name = name;
+        this.lastName = lastName;
+    }
+
+    greet() {
+        return `Hello this is ${this.name} ${this.lastName}`;
+    }
+}
+
+const person1 = new Person("Johan", "Smith");
+console.log(person1.greet());
+```
+
+### **OO Requirements**
+
+![OO Requirements](./img/OO%20Requirements.png)
+
+* **Association**
+
+```javascript
+class Person { // Syntactic Sugar
+    constructor(name, lastName) { // Method that returns properties
+        this.name = name;
+        this.lastName = lastName;
+    }
+}
+
+const user1 = new Person("Johan", "Smith");
+const user2 = new Person("Mario", "Marcelo");
+
+user2.boyfriend = user1; // This is a relation
+
+console.log(user1);
+console.log(user2);
+```
+
+* **Aggregation**
+
+```javascript
+const company = { // Aggregate
+    name: "HanSDev Corp",
+    employees: [],
+}
+
+class Person { // Syntactic Sugar
+    constructor(name, lastName) { // Method that returns properties
+        this.name = name;
+        this.lastName = lastName;
+    }
+}
+
+const user1 = new Person("Johan", "Smith"); // Component
+const user2 = new Person("Mario", "Marcelo");
+
+company.employees.push(user1);
+company.employees.push(user2);
+
+console.log(user1);
+console.log(user2);
+
+console.log(company);
+```
+
+* **Composition**
+
+```javascript
+const person = {
+    name: "Johan",
+    lastNAme: "Smith",
+    address: { // This component does not have independence because is strongly related to person.
+        street: "Square Street",
+        city: "Bogota",
+    }
+}
+```
+
+### **OOP Principles**
+
+![OO Principles](./img/OO%20Principles.png)
+
+* **Encapsulation**
+
+* Concentrate data and functions hiding internal details.
+
+```javascript
+function Company(name) {
+    let employees = []; // This is a primitive var
+    this.name = name; // This is a property of the constructor
+
+    this.getEmployee = function () {
+        return employees;
+    };
+
+    this.addEmployee = function(employee) {
+        employees.push(employee);
+    };
+
+};
+
+const company1 = new Company("HansDev Corp");
+console.log(company1);
+
+company1.addEmployee({name: "Johan"});
+console.log(company1.getEmployee());
+```
+
+* **Inheritance**
+
+* Create a specialized object starting from a general one.
+
+> **With a Constructure:**
+![Inheritance with a Constructure](./img/Inheritance%201.png)
+
+> **With a Class:**
+![Inheritance with a Constructure](./img/Inheritance%202.png)
+
+* **Polymorphism**
+
+* Handle multiple data types uniformly.
+
+> **Benefits:**
+![Polymorphism Benefits](./img/Polymorphism%20Benefits.png)
+
+* **Subtype Polymorphism**
 
 ___
 # JS Concepts for React.js
@@ -1367,4 +1541,770 @@ console.log(person.location?.city); // The ? (-> if it exists) optionally looks 
 
     loadData();
     console.log('Linea 2.');
+```
+
+# **Node.js Course Notes**
+
+## **Introduction**
+
+### **What is Node.js?**
+
+* It is a JS Runtime Environment. It allows to run/execute JS outside the browser.
+* Node.js is an open-source, cross-platform JavaScript runtime environment and library for running web applications outside the client's browser.
+
+### **How to Install Node.js?**
+
+* `NPM vs NPX`: NPM is a package manager used to install, delete, and update Javascript packages on your machine. NPX is a package executer, and it is used to execute javascript packages directly, without installing them.
+
+1. Go to nodejs.org.
+
+    > This package has installed:
+
+    > * Node.js v20.2.0 to /usr/local/bin/node
+    > * npm v9.6.6 to /usr/local/bin/npm
+
+    > Make sure that /usr/local/bin is in your $PATH.
+2. `node -v/--version`: This prints the Node.js version.
+
+### **Node REPL in the CLI**
+
+1. `node`: This opens the node REPL (Read-Eval-Print Loop)
+   > A REPL is a computer environment where user inputs are read and evaluated, and then the results are returned to the user.Jul 30, 2021
+2. `^L`: This cleans the CLI.
+   > Abbreviated "Ctrl" or "Ctl." A modifier key that is pressed with a letter or digit key to command the computer. The caret symbol is a common symbol for Control; for example, ^Y means Ctrl-Y.
+3. `setInterval()`: This runs a function setting a timer:
+   ```javascript
+   setInterval(()=> console.log("Hello"), 1000) // It expects as arguments a 1.) function and a 2.) time in ms – i.e., millisecond –.
+   ```
+4. `^C`: It ends a programm.
+5. `process`: It access and displays different info about my OS.
+   1. `process.version`: It prints the Node.js version property.
+   2. `process.cwd()`: It prints the Current Working Directory.
+6. `os.userInfo()`: This function prints info about my user.
+7. `node -e ""`: It runs JS code.
+   1. `node -e "console.log(10+10)"`
+   2. `node -e "console.log(os.userInfo())"`
+8. `.save`: Save all evaluated commands in a REPL session to a file.
+   1. `.save names.js`
+9.  `.load`: It loads the saved commands of a REPL.
+    1. `.load names.js`
+
+### **Node.js in VS Code**
+
+* Node.js uses primarily the same JS syntaxis.
+
+```javascript
+// Sample #1:
+
+const age = 17;
+
+if (age >= 18) {
+    console.log("You are an adult");
+}else if (age >= 13) {
+    console.log("You are a teenager");
+}else{
+    console.log("You are a child");
+}
+
+// Sample #2:
+
+const names = ["Johan", "Mario"];
+
+for (let i=0; i<names.length; i++) {
+    console.log(names[i])
+}
+
+// Sample #3:
+const showUserInfo = (name, age) => `Your name is ${name}, and you are ${age} old`;
+
+console.log(showUserInfo("Johan", 25));
+console.log(showUserInfo("Mario", 24));
+```
+
+### **Browser vs Node.js**
+
+* Console
+* CLI
+
+### **Global Objects**
+
+```javascript
+console.log(__dirmane); // Output: /Users/johanavendano/HanSPy/nodejs_course/index.js:1
+
+console.log(__filename); // Output: /Users/johanavendano/HanSPy/nodejs_course/index.js
+
+console.log(module); // Returns an obj with different properties. It allows us to SPLIT a JS app in multiple files.
+
+console.log(require); // Returns an obj with different properties. It allows us to IMPORT split files.
+
+console.log(process); // It returns information about the system.
+```
+### **Timers**
+
+* `setInterval()`: It executes a code each certain interval of time.
+
+```javascript
+setInterval(() => {
+    console.log("Hello World!");
+}, 2000)
+```
+
+* `setTimeout()`: It executes a code when certain interval of time times out.
+
+```javascript
+setTimeout(() => {
+    console.log("Hello World!");
+}, 5000)
+```
+
+### **CommonJS Modules**
+
+* It is better to separate your code on different modules/files. For this, you can use:
+
+* `module`: Returns an obj with different properties. It allows us to SPLIT a JS app in multiple files.
+
+> This is under myModule.js file.
+
+```javascript
+const myWebAddress = "faztweb.com";
+module.exports = myWebAddress;
+```
+
+> It can also export an obj with multiple properties.
+
+```javascript
+//Option #1:
+const myWebAddress = "faztweb.com";
+const friends = ["Ivan", "Stick"];
+const user = {
+    name: "Johan",
+    age: 25
+}
+
+const group = {
+    myWebAddress: myWebAddress,
+    friends: friends,
+    user: user
+}
+
+module.exports = group;
+
+//Option #2:
+const myWebAddress = "faztweb.com";
+const friends = ["Ivan", "Stick"];
+const user = {
+    name: "Johan",
+    age: 25
+}
+
+module.exports = {
+    myWebAddress: myWebAddress,
+    friends: friends,
+    user: user
+};
+
+//Option #3:
+const myWebAddress = "faztweb.com";
+const friends = ["Ivan", "Stick"];
+const user = {
+    name: "Johan",
+    age: 25
+}
+
+module.exports = {
+    myWebAddress,
+    friends,
+    user
+};
+```
+
+> It can also export properties individually.
+
+```javascript
+// Sample #1:
+
+const myWebAddress = "faztweb.com";
+const friends = ["Ivan", "Stick"];
+const user = {
+    name: "Johan",
+    age: 25
+}
+
+module.exports.user = user;
+module.exports.myWebAddress = myWebAddress;
+
+// Sample #2:
+
+function add (x, y) {
+    return x + y;
+}
+
+function multiply (x, y) {
+    return x * y;
+}
+
+module.exports = {
+    add,
+    multiply
+}
+```
+
+* `require()`: Returns an obj with different properties. It allows us to IMPORT split files.
+
+> This is under index.js file.
+
+```javascript
+// Sample #1:
+
+const web = require("./myModule")
+
+console.log(web);
+```
+
+> This can also retrieve specific properties.
+
+```javascript
+// Sample #1:
+
+const {myWebAddress, friends, user} = require("./myModule")
+
+console.log(myWebAddress);
+console.log(friends);
+console.log(user);
+
+// Sample #2:
+
+const math = require('../math/index');
+console.log(math.add(10, 15));
+```
+
+### **Node.js Modules/ Node API**
+
+* Node.js already has its own functions that can be used through different modules – this is AKA the node API –: https://nodejs.org/api/modules.html.
+
+* **Module `'os'`: Stands for "Operating System".**
+
+```javascript
+const os = require('os')
+
+console.log(os.userInfo())
+console.log(os.uptime())
+console.log(os.platform())
+console.log(os.totalmem())
+console.log(os.freemem())
+
+console.table({ // console.table() prints the outputs on a table.
+    os: os.platform(),
+    version: os.version(),
+    totalMemory: os.totalmem()
+})
+```
+
+* **Module `'path'`:**
+
+```javascript
+const path = require('path')
+
+const filePath = path.join('HanSPy', 'nodejs_course', 'module', 'index.js')
+
+console.log(path.basename(filePath))
+// Output: index.js
+
+console.log(path.dirname(filePath))
+// Output: HanSPy/nodejs_course/module
+
+console.log(path.parse(filePath))
+// {
+//   root: '',
+//   dir: 'HanSPy/nodejs_course/module',
+//   base: 'index.js',
+//   ext: '.js',
+//   name: 'index'
+// }
+
+console.log(path.resolve('index.js'))
+// Output: /Users/johanavendano/HanSPy/nodejs_course/module/index.js
+```
+
+* **Module `'fs'` Sync: Stands for "FileSystem".**
+
+```javascript
+// Reading Files:
+
+    // Sample #1:
+
+    const fs = require('fs')
+    const first = fs.readFileSync('../data/first.txt')
+    console.log(first)
+    // Output: <Buffer 48 65 6c 6c 6f 20 57 6f 72 6c 64 21>
+
+    // Sample #2:
+
+    const fs = require('fs')
+    const first = fs.readFileSync('../data/first.txt', 'utf-8')
+    console.log(first)
+    // Output: Hello World!
+
+    // Sample #3:
+    
+    const fs = require('fs')
+    const first = fs.readFileSync('../data/first.txt')
+    console.log(first.toString())
+    // Output: Hello World!
+
+//-----------------------
+
+// Creating Files:
+
+    // Sample #1:
+    const fs = require('fs');
+    fs.writeFileSync('../data/third.txt', "Este es un tercer archivo"); // It receives a root to create a file.
+
+    // Sample #1: También se pueden pasar variables.
+    const fs = require('fs');
+    const title = "Este es un archivo nuevo";
+    fs.writeFileSync('../data/third.txt', title); // Si yo vuelvo a ejecutar este código mi archivo se reescribirá por completo.
+
+    // Sample #1: Si en vez de reescribir un archivo quiero agregar contenido puedo usar el siguiente objeto.
+    const fs = require('fs');
+    const title = "Este es un tercer archivo";
+    fs.writeFileSync('../data/third.txt', title, {
+        flag: 'a',
+    });
+```
+
+* **Module `'fs'` Async: Stands for "FileSystem".**
+
+* A `programming paradigm` is the classification, style or way of programming. It is an approach to solve problems by using programming languages. Depending on the language, the difficulty of using a paradigm differs.
+
+![Programming Paradigms](./img/Programming%20Paradigms.png)
+
+* `Asynchronous programming` is the multitasker, moving from one to-do to the other and alerting the system when each one is complete. Synchronous programming functions as a one-track mind, checking off one task at a time in a rigid sequence.
+
+![Programming Paradigms](./img/Sync:Async%20Programming.png)
+
+  * **Callback Hell**
+    * Pending look up: What is Event Loop Node.js?
+
+```javascript
+const fs = require('fs');
+
+// In this case this cannot be saved into a variable because the code will be run later on so the syntaxis must changed.
+
+// Also, the function will receive two parameters to indicate if it fails or succeeds.
+
+fs.readFile('../data/first.txt', 'utf-8', (err, data) => { // This arrow function is AKA a callback because it is executed after runnig the first function i.e., readFile().
+    if (err) {
+        console.log(err);
+    }
+    console.log(data); // Alternitively, I can use .toString() to become the buffer input into a str.
+
+    fs.readFile('../data/second.txt', 'utf-8', (err, data) => { 
+        if (err) {
+            console.log(err);
+        }
+        console.log(data);
+    });
+});
+```
+
+* **Module `'http'`: Stands for "Hypertext Transfer Protocol".**
+  
+  * It allows us to create a web server.
+  * Client-server Model.
+    * Client-side Languages.
+    * Server-side Languages.
+  * [List of TCP and UDP port numbers](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers)
+
+![Client-server Model](../jsCourse/img/Client-server%20Model.png)
+
+```javascript
+// http://localhost:3000
+
+// Sample #1: Response.
+
+const http = require('http');
+
+http.createServer((req, res) => {
+    res.write("Hello World");
+    res.end(); // The res. end() method ends the current response process. This method is used to quickly end the response without any data. With res.end() you can only respond with text and it will not set "Content-Type".
+
+}).listen(3000);
+
+console.log("Server listening in PORT 3000");
+
+    // Sample #1.1:
+
+    const app = require('http').createServer((req, res) => res.send('Ahoy!')); // res.send() will check the structure of your output and set header information accordingly.
+    const PORT = process.env.PORT || 3000;
+
+    app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`);
+    });
+
+// Sample #2: Request.
+
+const http = require('http');
+
+http.createServer((req, res) => {
+
+    console.log(req.url);
+
+    if (req.url === '/') {
+        res.write("Welcome to the main page!");
+        return res.end();
+    }
+
+    if (req.url === '/about') {
+        res.write("Welcome to about!");
+        return res.end();
+    }
+
+    res.write("Oops page not found!");
+    return res.end();
+}).listen(3000);
+
+// Sample #3: With HTML Code.
+
+const http = require('http');
+
+http.createServer((req, res) => {
+
+    console.log(req.url);
+
+    if (req.url === '/') {
+        res.write("Welcome to the main page!");
+        return res.end();
+    }
+
+    if (req.url === '/about') {
+        res.write("Welcome to about!");
+        return res.end();
+    }
+
+    res.write(`
+    <h1>Oops page not found!</h1>
+    <p>This page was not found!</h1>
+    <a href="/">Back to main.</a>
+    `);
+    return res.end();
+}).listen(3000);
+```
+
+### **Open-source Modules**
+
+* **[NPM (Node.js Package Manager):](https://www.npmjs.com)**
+  
+  * `npm` allows us to manage third-party packages.
+  * We can run any of the following cmd to install modules:
+
+    * `npm install module_name`
+    * `npm i module_name`
+    * `npm i module_1 module_2 module_3`
+
+  * The `node_modules` folder contains all the node.js modules I install.
+  
+  * The `package.json` file contains an object with the modules I install. This can be used for instance, in case I remove the `node_modules` folder or wants to install them in a different device by simply running the CLI cmd `npm install`. 
+
+    This will install our dependencies i.e., those inside the `package.json`.
+
+  * To remove a module we can run the CLI cmd `npm install module_name`.
+
+* **`npm init`:**
+
+  * After running this code the CLI will prompt you to answer certain questions to initiate a node.js project and will also create a `package.json` file where all our answers will be contained.
+  * Under the `package.json` file, you will see a script object that can be used to create shortcodes.
+
+  * **Hints:**
+
+    * Version 1.0.0 -> SemVer (Semantic Versioning) e.g., "0.0.1".
+
+  * `package.json` scripts:
+
+```json
+{
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "twilio": "^4.11.1"
+  },
+  "scripts": {
+    "start": "node src/nodejs/module/index.js", // This allows us to create shortcuts that can be used with the `npm run` cmd.
+    "dev": "node src/nodejs/module/index.js"
+  }
+}
+```
+
+  * `npm i nodemon -D`: This cmd install modules under the DevDependencies.
+    * The `nodemon` module helps to automatically display in our CLI the changes we make to our files: `nodemon index.js`.
+  * `npm i nodemon -g`: This cmd install a module in the computer global modules.
+  * `npm remove nodemon`: This cmd removes a module. If it is a global one add `-g` to the cmd.
+
+* > Find more npm CLI cmd at https://docs.npmjs.com/cli/v9/commands.
+
+* **[NPX (Node.js Package eXecute):](https://www.npmjs.com)**
+
+* It is simply an NPM package runner. It allows developers to execute any Javascript Package available on the NPM registry without even installing it. NPX is installed automatically with NPM version 5.2.
+
+* This is helpful if we want to use a module without installing it.
+
+  * For instance we can use the module `serve` to create a server real quick: `npx serve nodejsCourse`.
+
+### **Event Loop**
+
+```javascript
+
+```
+
+### **Promise**
+
+```javascript
+const { error } = require('console');
+const {readFile} = require('fs');
+
+const getText = (pathFile) => { // This becomes a callback into a promise.
+    return new Promise(function (resolve, reject) {
+        readFile(pathFile, 'utf-8', (err, data) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(data)
+        })
+    });
+}
+
+getText('../data/first.txt')
+    .then(result => console.log(result))
+    .then(() => getText('../data/second.txt'))
+    .then(result => console.log(result))
+    .catch(error => console.log(error))
+```
+
+### **Async / Await**
+
+* They are promises, but with an easier syntaxis.
+
+```javascript
+const {readFile} = require('fs');
+
+const getText = (pathFile) => {
+    return new Promise(function (resolve, reject) {
+        readFile(pathFile, 'utf-8', (err, data) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(data)
+        })
+    });
+}
+
+async function read() {
+    try {
+        // throw new Error("This is an unexpected error")
+        const result1 = await getText('../data/first.txt')
+        const result2 = await getText('../data/second.txt')
+        console.log(result1)
+        console.log(result2)
+    }catch(error){
+        console.log(error)
+    }
+}
+
+read();
+```
+
+### **Promesify**
+
+* This allows us to become a callback into a promise with ease.
+
+```javascript
+const {readFile} = require('fs');
+const {promisify} = require('util')
+
+const readFilePromise = promisify(readFile);
+
+async function read() {
+    try {
+        // throw new Error("This is an error")
+        const result1 = await readFilePromise('../data/first.txt', 'utf-8')
+        const result2 = await readFilePromise('../data/second.txt', 'utf-8')
+        console.log(result1)
+        console.log(result2)
+    }catch(error){
+        console.log(error)
+    }
+}
+
+read();
+```
+
+### **fs Promise**
+
+```javascript
+const {readFile} = require('fs/promises');
+
+async function read() {
+    try {
+        // throw new Error("This is an error")
+        const result1 = await readFile('../data/first.txt', 'utf-8')
+        const result2 = await readFile('../data/second.txt', 'utf-8')
+        console.log(result1)
+        console.log(result2)
+    }catch(error){
+        console.log(error)
+    }
+}
+
+read();
+```
+
+### **fs Promise**
+
+```javascript
+const {readFile} = require('fs/promises');
+
+async function read() {
+    try {
+        // throw new Error("This is an error")
+        const result1 = await readFile('../data/first.txt', 'utf-8')
+        const result2 = await readFile('../data/second.txt', 'utf-8')
+        console.log(result1)
+        console.log(result2)
+    }catch(error){
+        console.log(error)
+    }
+}
+
+read();
+```
+
+### **Events**
+
+* Event-driven Programming.
+
+```javascript
+const EvenEmitter = require('events');
+
+const customEmitter = new EvenEmitter()
+
+customEmitter.on('response', (data) => {
+    console.log("received")
+    console.log(data)
+})
+
+customEmitter.emit('response', "hello world")
+customEmitter.emit('response', {name: "Johan"})
+customEmitter.emit('response', [1, 2, 3])
+```
+
+### **Streams**
+
+```javascript
+// const {writeFile} = require('fs/promises')
+
+// const createBigFile = async () => {
+//     await writeFile('../data/bigFile.txt', 'Hello World'.repeat(100))
+// }
+
+// createBigFile();
+
+const {createReadStream} = require('fs')
+
+const stream = createReadStream('../data/bigFile.txt', {
+    encoding: 'utf-8',
+})
+
+stream.on('data', (chunk) => {
+    console.log(chunk)
+})
+
+stream.on('end', () => {
+    console.log('Ya terminé')
+})
+
+stream.on('error', (error) => {
+    console.log(error)
+})
+```
+
+### **Streams and HTTP**
+
+```javascript
+```
+
+### **CommonJS**
+
+* Ecmascript Modules
+* Adding `"type": "module"` inside our `package.json` will allow us to use import/export syntaxis.
+
+```json
+{
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "twilio": "^4.11.1"
+  },
+  "scripts": {
+    "start": "node /Users/johanavendano/dev/src/hansDev/nodejsCourse/module/index.js",
+    "dev": "node /Users/johanavendano/dev/src/hansDev/nodejsCourse/module/index.js"
+  }
+}
+```
+
+```javascript
+import math from '../math/index.js'
+// const math = require('../data/index') // This is the same as above
+
+console.log(math.add(10, 20))
+```
+
+### **fetch**
+
+* #### **fetch():**
+
+```javascript
+// Promises:
+    let data = fetch('https://jsonplaceholder.typicode.com/posts');
+
+    console.log(data); // This returns a PROMISE. When we execute a task, the browser can execute other tasks while our initial task is completed. So that, our code does not get stuck.
+```
+* #### **.then():** 
+```javascript
+// Promises:
+    let data = fetch('https://jsonplaceholder.typicode.com/posts');
+        .then(function(){ // When this task ends the task inside .then() will be executed.
+            console.log('Finalizó la carga.')
+        });
+
+    console.log('Linea 2.');
+
+    // Or:
+    const ul = document.createElement("ul");
+
+    let data = fetch('https://jsonplaceholder.typicode.com/posts').then(function(response){ // This returns a response object
+            return response.json(); // This becomes the response-object into a JSON file.
+        }).then(function (data){
+            console.log(data);
+            data.forEach(function (post){
+                const li = document.createElement("li");
+                li.innerText = post.title;
+                ul.append(li);
+            });
+            document.body.append(ul);
+        });
+
+    console.log('Linea 2.');
+```
+
+* The following will also work without the Async Function if we already the `"type": "module"` inside our `package.json`. If not, use the Async Function as it follows:
+
+![fetch async](../jsCourse/img/Fetch().png)
+
+### **Express**
+
+```javascript
+```
+
+### **Deploy**
+
+```javascript
 ```
